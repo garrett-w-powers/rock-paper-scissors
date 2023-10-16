@@ -29,6 +29,9 @@
       .icon{
         flex: auto;
       }
+      .player{
+        flex-direction: row-reverse;
+      }
     </style>
   </head>
 
@@ -41,14 +44,23 @@
 
     <!-- Three buttons with your selection (rock, paper, and scissors) -->
     <!-- Make a button for resetting the game -->
-    <Div class="computer">
-        <div class="score">score</div>
-        <div class="icon">icon</div>
-    </Div>
-    <Div class="player">
-        <div class="score">score</div>
-        <div class="icon">icon</div>
-    </Div>
+    <div class="computer">
+        <div class="score">
+            <h2>Computer</h2>
+            <p>score</p>
+        </div>
+        <div class="icon">computer goes here</div>
+    </div>
+    <div class="player">
+        <div class="score">
+            <h2>Player</h2>
+            <p>score</p>
+        </div>
+        <div class="icon">player goes here</div>
+    </div>
+    <div>
+        <button>Reset</button>
+    </div>
 
   </body>
 
