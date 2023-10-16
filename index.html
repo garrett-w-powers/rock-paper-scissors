@@ -19,6 +19,16 @@
         color: white;
         padding: 3px;
       }
+      .computer, .player {
+        display: flex;
+      }
+      .score{
+        flex: auto;
+        flex-grow: 2;
+      }
+      .icon{
+        flex: auto;
+      }
     </style>
   </head>
 
@@ -31,8 +41,14 @@
 
     <!-- Three buttons with your selection (rock, paper, and scissors) -->
     <!-- Make a button for resetting the game -->
-    <Div class="computer"></Div>
-    <Div class="player"></Div>
+    <Div class="computer">
+        <div class="score">score</div>
+        <div class="icon">icon</div>
+    </Div>
+    <Div class="player">
+        <div class="score">score</div>
+        <div class="icon">icon</div>
+    </Div>
 
   </body>
 
