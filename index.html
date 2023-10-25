@@ -34,11 +34,11 @@
       .player {
         flex-direction: row-reverse;
       }
-      .controls{
+      .controls {
         display: flex;
         justify-content: center;
       }
-      .message{
+      .gameMessage {
         display: flex;
         justify-content: center;
         height: 100px;
@@ -58,29 +58,38 @@
     <div class="computer">
       <div class="score">
         <h2>Computer</h2>
-        <p>score</p>
-        <p class="play"></p>
+        <p class="computerScore">Score: 0</p>
+        <p class="computerPlay message"></p>
       </div>
       <div class="icon">
-        <img src=" https://upload.wikimedia.org/wikipedia/commons/5/52/Robot_%28699%29_-_The_Noun_Project.svg" alt="a robot" height="120"></div>
+        <img
+          src=" https://upload.wikimedia.org/wikipedia/commons/5/52/Robot_%28699%29_-_The_Noun_Project.svg"
+          alt="a robot"
+          height="120"
+        />
+      </div>
     </div>
-    <div class="message">
-        <h2></h2>
+    <div class="gameMessage message">
+      <h2></h2>
     </div>
     <div class="player">
       <div class="score">
         <h2>Player</h2>
-        <p>score</p>
-        <p class="play"></p>
+        <p class="playerScore">Score: 0</p>
+        <p class="playerPlay message"></p>
       </div>
       <div class="icon">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/80/Computer_user_icon.svg" alt="guy at a computer" height="120">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/8/80/Computer_user_icon.svg"
+          alt="guy at a computer"
+          height="120"
+        />
       </div>
     </div>
     <div class="controls">
-      <button>Rock</button>
-      <button>Paper</button>
-      <button>Scissors</button>
+      <button class="rock">Rock</button>
+      <button class="paper">Paper</button>
+      <button class="scissors">Scissors</button>
     </div>
   </body>
 
@@ -89,43 +98,109 @@
       return Math.floor(Math.random() * max);
     }
 
-    const playerScoreCounter = document.querySelector('.player score');
-    const computerScoreCounter = document.querySelector('.computer score');
-    const playerPlayMessage = document.querySelector('.player play');
-    const computerPlayMessage = document.querySelector('.computer play');
-    const gameMessage = document.querySelector('.message');
-    
-    const getPlay = () => {
-        if(play == 1){
-            return "rock"
-        }
-        else if (play == 2) {
-            return "paper"
-        }
-        else if (play == 3){
-            return "scissors"
-        }
-        else {
-            return null
-        }
-    }
-    const playRound = (play) => {
-        computerPlay = getRandomInt(3);
+    const playerScoreCounter = document.querySelector(".playerScore");
+    const computerScoreCounter = document.querySelector(".computerScore");
+    const playerPlayMessage = document.querySelector(".playerPlay");
+    const computerPlayMessage = document.querySelector(".computerPlay");
+    const gameMessage = document.querySelector(".gameMessage");
+    const rock = document.querySelector(".rock");
+    const paper = document.querySelector(".paper");
+    const scissors = document.querySelector(".scissors");
 
-        playerPlayMessage.textContent = `Player threw ${getPlay(play)}`;
-        computerPlayMessage.textContent = `Computer threw ${getPlay(computerPlay)}`;
-
-        if(play == computerPlay) {
-            gameMessage.textContent = "Tie! Try again!"
-        }
-        if (play > computerPlay) {
-            gameMessage.textContent = `${getPlay(play)} beats ${getPlay(computerPlay)}!`
-        }
+    const getPlay = (play) => {
+      if (play == 0) {
+        return "rock";
+      } else if (play == 1) {
+        return "paper";
+      } else if (play == 2) {
+        return "scissors";
+      } else {
+        return null;
+      }
     };
 
-    
+    const scoreCheck = (score) => {
+      if (score === 3) {
+      }
+    };
+    const playRound = (play) => {
+      computerPlay = getRandomInt(3);
+
+      playerPlayMessage.textContent = `Player threw ${getPlay(play)}`;
+      computerPlayMessage.textContent = `Computer threw ${getPlay(
+        computerPlay
+      )}`;
+
+      if (play == computerPlay) {
+        gameMessage.textContent = "Tie! Try again!";
+        console.log(
+          `Player Score: ${playerScore}, Computer Score: ${computerScore}`
+        );
+      } else if (play > computerPlay) {
+        message = `${getPlay(play)} beats ${getPlay(computerPlay)}!`;
+        playerScore++;
+        playerScoreCounter.textContent = `Score: ${playerScore}`;
+        console.log(
+          `Player Score: ${playerScore}, Computer Score: ${computerScore}`
+        );
+        if (playerScore == 3) {
+          gameMessage.textContent = message + " Player wins!";
+          setGameOver();
+        } else {
+          gameMessage.textContent = message;
+        }
+      } else {
+        message = `${getPlay(computerPlay)} beats ${getPlay(play)}!`;
+        computerScore++;
+        computerScoreCounter.textContent = `Score: ${computerScore}`;
+        console.log(
+          `Player Score: ${playerScore}, Computer Score: ${computerScore}`
+        );
+        if (computerScore == 3) {
+          gameMessage.textContent = message + " Computer wins!";
+          setGameOver();
+        } else {
+          gameMessage.textContent = message;
+        }
+      }
+    };
+
+    const setGameOver = () => {
+      rock.disabled = true;
+      paper.disabled = true;
+      scissors.disabled = true;
+
+      resetButton = document.createElement("button");
+      resetButton.textContent = "Start new game";
+      document.body.appendChild(resetButton);
+      resetButton.addEventListener("click", resetGame);
+    };
+
+    const resetGame = () => {
+      playerScore = 0;
+      computerScore = 0;
+
+      computerScoreCounter.textContent = "Score: 0";
+      playerScoreCounter.textContent = "Score: 0";
+
+      const resetMessages = document.querySelectorAll(".message");
+      for (const message of resetMessages) {
+        message.textContent = "";
+      }
+
+      resetButton.parentNode.removeChild(resetButton);
+
+      rock.disabled = false;
+      paper.disabled = false;
+      scissors.disabled = false;
+    };
+
     let playerScore = 0;
     let computerScore = 0;
+
+    rock.addEventListener("click", () => playRound(0));
+    paper.addEventListener("click", () => playRound(1));
+    scissors.addEventListener("click", () => playRound(2));
 
     // Make a random number selector that will pick one of three options which is the computer move
     // Make a function that "scores" a selection. Roll for the computer at the same time.
