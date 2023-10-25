@@ -30,9 +30,14 @@
       }
       .icon {
         flex: auto;
+        display: flex;
+        justify-content: center;
       }
       .player {
         flex-direction: row-reverse;
+      }
+      .player .score {
+        text-align: right;
       }
       .controls {
         display: flex;
@@ -119,8 +124,28 @@
       }
     };
 
-    const scoreCheck = (score) => {
-      if (score === 3) {
+    const playerWins = (player, computer) => {
+      switch (player) {
+        case "rock":
+          if (computer == "paper") {
+            return false;
+          } else if (computer == "scissors") {
+            return true;
+          } else return null;
+          break;
+        case "paper":
+          if (computer == "scissors") {
+            return false;
+          } else if (computer == "rock") {
+            return true;
+          } else return null;
+          break;
+        case "scissors":
+          if (computer == "rock") {
+            return false;
+          } else if (computer == "paper") {
+            return true;
+          } else return null;
       }
     };
     const playRound = (play) => {
@@ -136,31 +161,34 @@
         console.log(
           `Player Score: ${playerScore}, Computer Score: ${computerScore}`
         );
-      } else if (play > computerPlay) {
-        message = `${getPlay(play)} beats ${getPlay(computerPlay)}!`;
-        playerScore++;
-        playerScoreCounter.textContent = `Score: ${playerScore}`;
-        console.log(
-          `Player Score: ${playerScore}, Computer Score: ${computerScore}`
-        );
-        if (playerScore == 3) {
-          gameMessage.textContent = message + " Player wins!";
-          setGameOver();
-        } else {
-          gameMessage.textContent = message;
-        }
       } else {
-        message = `${getPlay(computerPlay)} beats ${getPlay(play)}!`;
-        computerScore++;
-        computerScoreCounter.textContent = `Score: ${computerScore}`;
-        console.log(
-          `Player Score: ${playerScore}, Computer Score: ${computerScore}`
-        );
-        if (computerScore == 3) {
-          gameMessage.textContent = message + " Computer wins!";
-          setGameOver();
+        if (playerWins(getPlay(play), getPlay(computerPlay))) {
+          message = `${getPlay(play)} beats ${getPlay(computerPlay)}!`;
+          playerScore++;
+          playerScoreCounter.textContent = `Score: ${playerScore}`;
+          console.log(
+            `Player Score: ${playerScore}, Computer Score: ${computerScore}`
+          );
+
+          if (playerScore == 3) {
+            gameMessage.textContent = message + " Player wins!";
+            setGameOver();
+          } else {
+            gameMessage.textContent = message;
+          }
         } else {
-          gameMessage.textContent = message;
+          message = `${getPlay(computerPlay)} beats ${getPlay(play)}!`;
+          computerScore++;
+          computerScoreCounter.textContent = `Score: ${computerScore}`;
+          console.log(
+            `Player Score: ${playerScore}, Computer Score: ${computerScore}`
+          );
+          if (computerScore == 3) {
+            gameMessage.textContent = message + " Computer wins!";
+            setGameOver();
+          } else {
+            gameMessage.textContent = message;
+          }
         }
       }
     };
@@ -201,9 +229,5 @@
     rock.addEventListener("click", () => playRound(0));
     paper.addEventListener("click", () => playRound(1));
     scissors.addEventListener("click", () => playRound(2));
-
-    // Make a random number selector that will pick one of three options which is the computer move
-    // Make a function that "scores" a selection. Roll for the computer at the same time.
-    // Make a function that resets the game by checking the score
   </script>
 </html>
