@@ -22,6 +22,8 @@
       .computer,
       .player {
         display: flex;
+        padding: 30px;
+        height: 300px;
       }
       .score {
         flex: auto;
@@ -32,6 +34,10 @@
       }
       .player {
         flex-direction: row-reverse;
+      }
+      .controls{
+        display: flex;
+        justify-content: center;
       }
     </style>
   </head>
@@ -49,19 +55,22 @@
       <div class="score">
         <h2>Computer</h2>
         <p>score</p>
+        <p class="play"></p>
       </div>
-      <div class="icon">computer goes here</div>
+      <div class="icon">
+        <img src=" https://upload.wikimedia.org/wikipedia/commons/5/52/Robot_%28699%29_-_The_Noun_Project.svg" alt="a robot" height="120"></div>
     </div>
     <div class="player">
       <div class="score">
         <h2>Player</h2>
         <p>score</p>
+        <p class="play"></p>
       </div>
       <div class="icon">
-        <img src="/media/user.svg" alt="guy at a computer" height="600">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/80/Computer_user_icon.svg" alt="guy at a computer" height="120">
       </div>
     </div>
-    <div>
+    <div class="controls">
       <button>Rock</button>
       <button>Paper</button>
       <button>Scissors</button>
@@ -72,8 +81,19 @@
     function getRandomInt(max) {
       return Math.floor(Math.random() * max);
     }
+
+    const playerScoreCounter = document.querySelector('.player score');
+    const computerScoreCounter = document.querySelector('.computer score');
+    const playerPlayMessage = document.querySelector('.player play');
+    const computerPlayMessage = document.querySelector('.computer play');
     
-    const checkScore = (score) => {};
+    const playRound = (play) => {
+        computerPlay = getRandomInt(3);
+
+        if(play == computerPlay) {
+
+        }
+    };
 
     
     let playerScore = 0;
