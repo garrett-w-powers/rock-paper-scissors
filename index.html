@@ -22,8 +22,7 @@
       .computer,
       .player {
         display: flex;
-        padding: 30px;
-        height: 300px;
+        height: 200px;
       }
       .score {
         flex: auto;
@@ -38,6 +37,11 @@
       .controls{
         display: flex;
         justify-content: center;
+      }
+      .message{
+        display: flex;
+        justify-content: center;
+        height: 100px;
       }
     </style>
   </head>
@@ -59,6 +63,9 @@
       </div>
       <div class="icon">
         <img src=" https://upload.wikimedia.org/wikipedia/commons/5/52/Robot_%28699%29_-_The_Noun_Project.svg" alt="a robot" height="120"></div>
+    </div>
+    <div class="message">
+        <h2></h2>
     </div>
     <div class="player">
       <div class="score">
@@ -86,12 +93,33 @@
     const computerScoreCounter = document.querySelector('.computer score');
     const playerPlayMessage = document.querySelector('.player play');
     const computerPlayMessage = document.querySelector('.computer play');
+    const gameMessage = document.querySelector('.message');
     
+    const getPlay = () => {
+        if(play == 1){
+            return "rock"
+        }
+        else if (play == 2) {
+            return "paper"
+        }
+        else if (play == 3){
+            return "scissors"
+        }
+        else {
+            return null
+        }
+    }
     const playRound = (play) => {
         computerPlay = getRandomInt(3);
 
-        if(play == computerPlay) {
+        playerPlayMessage.textContent = `Player threw ${getPlay(play)}`;
+        computerPlayMessage.textContent = `Computer threw ${getPlay(computerPlay)}`;
 
+        if(play == computerPlay) {
+            gameMessage.textContent = "Tie! Try again!"
+        }
+        if (play > computerPlay) {
+            gameMessage.textContent = `${getPlay(play)} beats ${getPlay(computerPlay)}!`
         }
     };
 
