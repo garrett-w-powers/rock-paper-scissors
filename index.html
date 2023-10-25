@@ -19,17 +19,18 @@
         color: white;
         padding: 3px;
       }
-      .computer, .player {
+      .computer,
+      .player {
         display: flex;
       }
-      .score{
+      .score {
         flex: auto;
         flex-grow: 2;
       }
-      .icon{
+      .icon {
         flex: auto;
       }
-      .player{
+      .player {
         flex-direction: row-reverse;
       }
     </style>
@@ -45,33 +46,41 @@
     <!-- Three buttons with your selection (rock, paper, and scissors) -->
     <!-- Make a button for resetting the game -->
     <div class="computer">
-        <div class="score">
-            <h2>Computer</h2>
-            <p>score</p>
-        </div>
-        <div class="icon">computer goes here</div>
+      <div class="score">
+        <h2>Computer</h2>
+        <p>score</p>
+      </div>
+      <div class="icon">computer goes here</div>
     </div>
     <div class="player">
-        <div class="score">
-            <h2>Player</h2>
-            <p>score</p>
-        </div>
-        <div class="icon">player goes here</div>
+      <div class="score">
+        <h2>Player</h2>
+        <p>score</p>
+      </div>
+      <div class="icon">
+        <img src="/media/user.svg" alt="guy at a computer" height="600">
+      </div>
     </div>
     <div>
-        <button>Rock</button>
-        <button>Paper</button>
-        <button>Scissors</button>
+      <button>Rock</button>
+      <button>Paper</button>
+      <button>Scissors</button>
     </div>
-
   </body>
 
   <script>
-    let randomNumber = Math.floor(Math.random() * 100) + 1;
-    // Start the score at zero
+    function getRandomInt(max) {
+      return Math.floor(Math.random() * max);
+    }
+    
+    const checkScore = (score) => {};
+
+    
+    let playerScore = 0;
+    let computerScore = 0;
+
     // Make a random number selector that will pick one of three options which is the computer move
     // Make a function that "scores" a selection. Roll for the computer at the same time.
-    // Make a function that resets the game
-
+    // Make a function that resets the game by checking the score
   </script>
 </html>
